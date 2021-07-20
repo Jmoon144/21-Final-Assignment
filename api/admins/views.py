@@ -7,6 +7,6 @@ from .models import Admin
 from .serializer import AdminSerializer
 
 class PublicListAPIView(generics.ListAPIView):
-    queryset = Admin.objects.all()
-    serializer_class = AdminSerializer
-    permission_classes = [IsAuthenticated] 
+    queryset           = Admin.objects.all()
+    serializer_class   = AdminSerializer
+    permission_classes = [IsAuthenticated]
