@@ -1,6 +1,7 @@
-from .views import PublicRetrieveModelMixin
+from .views import PublicListModelMixin
 from django.urls import path
 
 urlpatterns = [
-    path('/<int:number>', PublicRetrieveModelMixin.as_view())
+
+    path('', PublicListModelMixin.as_view())
 ]
