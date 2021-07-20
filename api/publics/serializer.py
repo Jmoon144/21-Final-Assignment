@@ -6,4 +6,4 @@ class PublicSerializer(ModelSerializer):
 
     class Meta:
         model  = Public
-        fields = ('id', 'number', 'cost')
+        fields = ('number', 'cost')
