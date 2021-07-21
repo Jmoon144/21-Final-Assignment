@@ -1,10 +1,12 @@
-from rest_framework import mixins, generics, serializers
+from rest_framework import mixins, generics, serializers, status
 from rest_framework.permissions import IsAuthenticated
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
-from .serializer import PublicSerializer, LoginSerializer
+
 from django.db.models import Q
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .models import Public
+from .serializer import PublicSerializer, LoginSerializer
 
 # class PublicListModelMixin(mixins.ListModelMixin, generics.GenericAPIView):
 #     queryset           = Public.objects.all()
@@ -42,11 +44,11 @@ class LoginAPI(generics.GenericAPIView):
             return Response(
                 {
                     'public' : serializers.data
-                }
+                }, status=status.HTTP_201_CREATED
             )
         except Public.DoesNotExist:
             return Response(
                 {
                     'message': '입력정보가 틀렸습니다.'
-                }
+                }, status=status.HTTP_401_UNAUTHORIZED
             )
