@@ -7,7 +7,7 @@ class PublicSerializer(ModelSerializer):
 
     class Meta:
         model  = Public
-        fields = ('number', 'cost')
+        fields = ('number', 'cost', 'password')
 
 class AdminSerializer(ModelSerializer):
     publics = PublicSerializer(many=True, read_only=True, source='public_set')

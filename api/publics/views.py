@@ -1,17 +1,52 @@
-from rest_framework import mixins, generics
+from rest_framework import mixins, generics, serializers
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
-from .serializer import PublicSerializer
-
+from rest_framework.response import Response
+from .serializer import PublicSerializer, LoginSerializer
+from django.db.models import Q
 from .models import Public
 
-class PublicListModelMixin(mixins.ListModelMixin, generics.GenericAPIView):
-    queryset           = Public.objects.all()
-    serializer_class   = PublicSerializer
-    permission_classes = [IsAuthenticated]
-    filter_backends    = [DjangoFilterBackend]
-    filterset_fields   = ['number', 'password']
-    
+# class PublicListModelMixin(mixins.ListModelMixin, generics.GenericAPIView):
+#     queryset           = Public.objects.all()
+#     serializer_class   = PublicSerializer
+#     permission_classes = [IsAuthenticated]
+#     filter_backends    = [DjangoFilterBackend]
+#     filterset_fields   = ['number', 'password']
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
+
+# class PublicListAPIView(generics.ListAPIView):
+#     queryset = Public.objects.all()
+#     serializer_class = PublicSerializer
+#     filter_backends = (DjangoFilterBackend,)
+#     filter_fields=('number','password')
+
+# def list(self, request):
+#     queryset = self.get_queryset()
+#     filter_backends = self.filter_queryset(queryset)
+#     serializer = PublicSerializer(filter_backends, many=True)
+#     return Response(serializer.data)
+
+class LoginAPI(generics.GenericAPIView):
+    serializer_class   = LoginSerializer
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            number = request.data['number']
+            password = request.data['password']
+            
+            public = Public.objects.get(number = number, password = password)
+            serializers = PublicSerializer(public)
+            return Response(
+                {
+                    'public' : serializers.data
+                }
+            )
+        except Public.DoesNotExist:
+            return Response(
+                {
+                    'message': '입력정보가 틀렸습니다.'
+                }
+            )

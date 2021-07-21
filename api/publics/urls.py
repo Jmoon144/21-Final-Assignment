@@ -1,7 +1,7 @@
-from .views import PublicListModelMixin
+from .views import LoginAPI
 from django.urls import path
 
 urlpatterns = [
 
-    path('', PublicListModelMixin.as_view())
+    path('', LoginAPI.as_view())
 ]
