@@ -44,7 +44,7 @@ class LoginAPI(generics.GenericAPIView):
             return Response(
                 {
                     'public' : serializers.data
-                }, status=status.HTTP_201_CREATED
+                }, status=status.HTTP_200_OK
             )
         except Public.DoesNotExist:
             return Response(
