@@ -1,12 +1,11 @@
-from rest_framework import mixins, generics, serializers, status
+from django.db.models import Q
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, mixins, serializers, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from django.db.models import Q
-from django_filters.rest_framework import DjangoFilterBackend
-
 from .models import Public
-from .serializer import PublicSerializer, LoginSerializer
+from .serializer import LoginSerializer, PublicSerializer
 
 # class PublicListModelMixin(mixins.ListModelMixin, generics.GenericAPIView):
 #     queryset           = Public.objects.all()
