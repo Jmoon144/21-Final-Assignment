@@ -1,12 +1,13 @@
-from rest_framework import serializers, viewsets, generics
-from rest_framework.permissions import IsAdminUser
-from django_filters.rest_framework import DjangoFilterBackend
 from django.http.response import JsonResponse
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, serializers, viewsets
+from rest_framework.permissions import IsAdminUser
 
-from .models import Admin
+from api.publics.models import Public
 from .serializer import AdminSerializer
 
+
 class PublicListAPIView(generics.ListAPIView):
-    queryset           = Admin.objects.all()
+    queryset           = Public.objects.all()
     serializer_class   = AdminSerializer
     permission_classes = [IsAdminUser]
