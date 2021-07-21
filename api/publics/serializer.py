@@ -6,4 +6,10 @@ class PublicSerializer(ModelSerializer):
 
     class Meta:
         model  = Public
-        fields = ('number', 'cost')
+        fields = ('number', 'password', 'cost')
+
+class LoginSerializer(ModelSerializer):
+
+    class Meta:
+        model  = Public
+        fields = ('number', 'password')
