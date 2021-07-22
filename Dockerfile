@@ -4,7 +4,7 @@ WORKDIR /app
 ADD    ./requirements.txt   /app/
 RUN    pip install -r requirements.txt
 
-ADD    ./djangosample   /app/djangosample/
+ADD    ./fa   /app/fa/
 ADD    ./manage.py      /app/
 
 CMD ["gunicorn", "fa.wsgi", "-c", "gunicorn/prod.py"]

@@ -13,8 +13,8 @@ class PublicAPITest(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username='root',
-            password='go9511455',
+            username = 'root',
+            password = 'go9511455',
             is_staff = True
         )
         

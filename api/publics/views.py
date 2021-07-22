@@ -7,28 +7,6 @@ from rest_framework.response import Response
 from .models import Public
 from .serializer import LoginSerializer, PublicSerializer
 
-# class PublicListModelMixin(mixins.ListModelMixin, generics.GenericAPIView):
-#     queryset           = Public.objects.all()
-#     serializer_class   = PublicSerializer
-#     permission_classes = [IsAuthenticated]
-#     filter_backends    = [DjangoFilterBackend]
-#     filterset_fields   = ['number', 'password']
-
-#     def get(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
-
-# class PublicListAPIView(generics.ListAPIView):
-#     queryset = Public.objects.all()
-#     serializer_class = PublicSerializer
-#     filter_backends = (DjangoFilterBackend,)
-#     filter_fields=('number','password')
-
-# def list(self, request):
-#     queryset = self.get_queryset()
-#     filter_backends = self.filter_queryset(queryset)
-#     serializer = PublicSerializer(filter_backends, many=True)
-#     return Response(serializer.data)
-
 class LoginAPI(generics.GenericAPIView):
     serializer_class   = LoginSerializer
     permission_classes = [IsAuthenticated]
