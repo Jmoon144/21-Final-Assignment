@@ -9,20 +9,7 @@ from rest_framework.test import APITestCase
 
 from api.publics.models import Public
 
-class RegistrationTestCase(APITestCase):
-
-    def test_registration(self):
-        data  = {
-            'username'  : 'root',
-            'email'     : 'sjwm98@naver.com',
-            'password1' : 'go9511455',
-            'password2' : 'go9511455',
-        }                                                                                                                                                                                                                                                                                                                                                                                                      
-        response = self.client.post('/api/rest-auth/registration/', data)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    
 class PublicAPITest(APITestCase):
-
     def setUp(self):
         self.user = User.objects.create_user(
             username='root',
