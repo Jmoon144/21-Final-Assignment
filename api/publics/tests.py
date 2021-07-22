@@ -35,9 +35,9 @@ class PublicAPITest(APITestCase):
         self.api_authentication()
 
     def api_authentication(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token.key}')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token}')
 
-    def test_Public_authenticated(self):
+    def test_Public_get_success(self):
         data = {'number':'2001', 'password':'1234'}
 
         response = self.client.post('/api/public', data =json.dumps(data), content_type='application/json')

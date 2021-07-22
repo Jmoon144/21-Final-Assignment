@@ -23,9 +23,9 @@ class AdminAPITest(APITestCase):
         self.api_authentication()
 
     def api_authentication(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token.key}')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token}')
 
-    def test_Public_list_authenticated(self):
+    def test_Public_list_post_success(self):
         response = self.client.get('/api/admin')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(), [{'number':'2001', 'cost':'1000', 'password':'1234'}])
