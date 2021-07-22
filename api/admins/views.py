@@ -6,7 +6,6 @@ from rest_framework.permissions import IsAdminUser
 from api.publics.models import Public
 from .serializer import AdminSerializer
 
-
 class PublicListAPIView(generics.ListAPIView):
     queryset           = Public.objects.all()
     serializer_class   = AdminSerializer
