@@ -8,8 +8,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from api.publics.models import Public
-
+    
 class PublicAPITest(APITestCase):
+
     def setUp(self):
         self.user = User.objects.create_user(
             username='root',
@@ -31,6 +32,14 @@ class PublicAPITest(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(), {'public' : {'number':'2001', 'password':'1234', 'cost':'1000'}})
+
+    def test_Public_get_failed(self):
+        data = {'number':'1111', 'password':'1111'}
+
+        response = self.client.post('/api/public', data =json.dumps(data), content_type='application/json')
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.json(), {'message' : '입력정보가 틀렸습니다.'})    
 
     def test_Public_list_user_none(self):
         self.client.force_authenticate(user=None)
