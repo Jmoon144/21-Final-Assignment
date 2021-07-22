@@ -25,7 +25,7 @@ class PublicAPITest(APITestCase):
     def api_authentication(self):
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token}')
 
-    def test_Public_get_success(self):
+    def test_Public_post_success(self):
         data = {'number':'2001', 'password':'1234'}
 
         response = self.client.post('/api/public', data =json.dumps(data), content_type='application/json')
@@ -33,7 +33,7 @@ class PublicAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(), {'public' : {'number':'2001', 'password':'1234', 'cost':'1000'}})
 
-    def test_Public_get_failed(self):
+    def test_Public_post_failed(self):
         data = {'number':'1111', 'password':'1111'}
 
         response = self.client.post('/api/public', data =json.dumps(data), content_type='application/json')
