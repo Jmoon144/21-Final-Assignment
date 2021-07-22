@@ -49,5 +49,5 @@ class LoginAPI(generics.GenericAPIView):
             return Response(
                 {
                     'message': '입력정보가 틀렸습니다.'
-                }, status=status.HTTP_401_UNAUTHORIZED
+                }, status=status.HTTP_400_BAD_REQUEST
             )
