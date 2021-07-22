@@ -13,8 +13,8 @@ class AdminAPITest(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            username='root2',
-            password='go9511455',
+            username = 'root2',
+            password = 'go9511455',
             is_staff = True
         )
         
