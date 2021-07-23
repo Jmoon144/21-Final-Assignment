@@ -8,7 +8,12 @@ REST API
 
 |Web API             |URL                 |Description|
 |--------------------|--------------------|     -     |
-|admin register      |/api/admin/user     |     -     |
+|admin register      |/api/admin/user/    |     -     |
 |public              |/api/public         |     -     |
 |public list         |/api/admin          |     -     |
 
+
+
+---------------------------
+
+Database
