@@ -8,6 +8,6 @@ REST API
 
 |Web API|URL|Description|
 |------|---|---|
-|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|
+|public list|테스트2|테스트3|
+|public login|테스트2|테스트3|
 |테스트1|테스트2|테스트3|
