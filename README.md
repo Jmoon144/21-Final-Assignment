@@ -1,6 +1,6 @@
 # 21-Final-Assignment
-# 아파트 관리비 시스템 보고서 API
-## 프로젝트 소개
+## 아파트 관리비 시스템 보고서 API
+### 프로젝트 소개
 
 1. 관리자는 세대별 관리비를 확인할 수 있습니다. (관리사무소용 API)
     - 관리용 비밀번호 혹은 인증을 통과해야만 이 API에 접근할 수 있습니다.
@@ -12,13 +12,13 @@
 
 -----------------------
 
-## 실행방법
-1. 
+### 실행방법
+1. github clone
 ```
-https://github.com/Jmoon144/21-Final-Assignment.git
+git clone https://github.com/Jmoon144/21-Final-Assignment.git
 ```
 
-2. manage.py 가 있는 위치에서
+2. manage.py 동등한 위치로 이동 후 docker compose 실행
 ```
 docker-compose up #실행
 ```
@@ -40,7 +40,7 @@ docker-compose up #실행
 
 ------------------------
 
-## Folder Structure
+### Folder Structure
 
 ```
 ├────── api
@@ -57,7 +57,7 @@ docker-compose up #실행
 
 
 -----------------------
-## REST API
+### REST API
 
 
 |Web API             |URL                 |Description|
@@ -70,7 +70,7 @@ docker-compose up #실행
 
 ---------------------------
 
-## Database
+### Database
 
 mysql use as Database.
 
