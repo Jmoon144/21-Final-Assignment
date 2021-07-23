@@ -6,8 +6,9 @@
 REST API
 ----------
 
-|Web API|URL|Description|
-|------|---|---|
-|public list|테스트2|테스트3|
-|public login|테스트2|테스트3|
-|테스트1|테스트2|테스트3|
+|Web API             |URL                 |Description|
+|--------------------|--------------------|     -     |
+|admin register      |/api/admin/user     |     -     |
+|public              |/api/public         |     -     |
+|public list         |/api/admin          |     -     |
+
