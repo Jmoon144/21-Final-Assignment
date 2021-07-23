@@ -1,10 +1,8 @@
 FROM python:3
+ENV PYTHONUNBUFFERED 0
 
-WORKDIR /app
-ADD    ./requirements.txt   /app/
-RUN    pip install -r requirements.txt
+WORKDIR /usr/src/app
 
-ADD    ./fa   /app/fa/
-ADD    ./manage.py      /app/
+ADD requirements.txt ./
 
-CMD ["gunicorn", "fa.wsgi", "-c", "gunicorn/prod.py"]
+RUN pip install -r requirements.txt

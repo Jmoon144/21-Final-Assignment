@@ -9,7 +9,6 @@ from .serializer import LoginSerializer, PublicSerializer
 
 class LoginAPI(generics.GenericAPIView):
     serializer_class   = LoginSerializer
-    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         try:
