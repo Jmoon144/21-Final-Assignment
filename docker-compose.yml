@@ -1,36 +1,44 @@
 version: '3'
+
+volumes:
+  data: {}
+
 services:
-  docker-mysql:
-    image: mysql
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
     volumes:
-      - ./db_data:/var/lib/mysql:rw
+      - .:/app/
     environment:
-      - MYSQL_DATABASE=fa
-      - MYSQL_USER=roots
-      - MYSQL_PASSWORD=go9511455
-      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      - DB_NAME=backend
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_HOST=db
+      - DB_PORT=3306
+      - SECRET_KEY=secretkey
+      - ALGORITHM=HS256
+    ports:
+      - 8000:8000
+    restart: always
+    depends_on:
+      - db
+    command: >-
+        sh -c 'python manage.py makemigrations &&
+               python manage.py migrate &&
+               python manage.py runserver 0.0.0.0:8000'
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+        #      - MYSQL_USER=backend_mentor
+      - MYSQL_DATABASE=backend
+      - MYSQL_PASSWORD=password
     ports:
       - 3306:3306
     command:
-      - --default-authentication-plugin=mysql_native_password
       - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
-      
-  docker-django:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    environment: 
-      - DJANGO_DB_HOST=docker-mysql
-      - DJANGO_DB_PORT=3306
-      - DJANGO_DB_NAME=fa
-      - DJANGO_DB_USERNAME=root
-      - DJANGO_DB_PASSWORD=go9511455
-    ports:
-      - 8000:8000
-    command: >-
-      sh -c 'python manage.py migrate &&
-          python manage.py runserver 0:8000'
+      - --collation-server=utf8mb4_general_ci
+      - --default-authentication-plugin=mysql_native_password
     volumes:
-      - .:/usr/src/app
-    restart: always
+      - data:/var/lib/mysql
