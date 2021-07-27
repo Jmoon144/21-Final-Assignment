@@ -1,29 +1,45 @@
 pipeline {
     agent {
         docker {
-            image "python:3.8"
-            args "-u root:root"
+	    alwaysPull true
+            image "lordmyshepherd/jenkins-build"
+            args "-e SECRET_KEY=ssssss -u root:root"
         }
     }
+
     stages {
-        stage('Environment Setup') {
-            steps { 
+        stage("1. Environment Setup") {
+            steps {
                 echo "The build number is ${env.BUILD_NUMBER}"
-                echo "You can also use \${BUILD_NUMBER} -> ${BUILD_NUMBER}"
-                sh 'apt-get -y update'
-                sh 'apt-get -y install gcc build-essential zlib1g-dev make'
-                sh "pip install -r requirements.txt"
+		
+		sh """
+		    pip install -r requirements/requirements.txt
+		    sudo service mysql start
+		    sudo mysql -uroot -e "UPDATE mysql.user SET authentication_string=PASSWORD('password') WHERE User='root'; FLUSH PRIVILEGES;"
+		    sudo mysql -uroot -ppassword -e "CREATE DATABASE db";
+                """
                 }
         }
-        stage('Build-test') {
+        stage("2. Build & Test") {
             steps {
-                sh 'python manage.py test --settings=fa.settings'
-            }
-        }
-        stage('Staging deploy') {
-            steps {
-                echo 'Build-test-t'
+                sh "python3.8 manage.py test ."
             }
         }
     }
 }
+// 	stage("3. Staging Deploy") {
+// 	    when {
+// 	        branch develop
+//             }
+            
+//             echo "Build staging docker image with Dockerfile"
+//             echo "Push docker image to registry"
+
+// 	    echo "get ec2 ip list with aws cli"
+//             echo "access to aws ec2 with aws cli"
+            
+//             echo "docker stop"
+//             echo "docker run {line 35 pushed docker images} -d
+//         }
+//     }
+// }
