@@ -173,3 +173,17 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
 }
+
+SECRET_KEY = 'django-insecure-g=1&f5z8n!te)fhe9+#@l6ti3!e=b$&txl)rhlmn(5xbhro6sw'
+
+
+DATABASES = {
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'fa',
+        'USER': 'roots',
+        'PASSWORD': 'go9511455',
+        'HOST': 'docker-mysql',
+        'PORT': '3306',
+    }
+}
