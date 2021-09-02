@@ -38,6 +38,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     unit     = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
+    cost     = models.CharField(max_length=15)
     objects  = UserManager()
 
     USERNAME_FIELD = 'unit'
@@ -47,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class DoorLog(models.Model):
     open_date = models.DateTimeField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user      = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'door_logs'
